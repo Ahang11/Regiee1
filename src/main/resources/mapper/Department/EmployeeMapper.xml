@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.reggie.mapper.EmployeeMapper">
+
+    <!--
+    <select id="checkIndexExists" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT COUNT(*)
+        FROM information_schema.statistics
+        WHERE table_schema = DATABASE() AND table_name = #{tableName} AND index_name = #{indexName}
+    </select>
+    -->
+
+    <select id="queryPage" resultType="com.reggie.dto.EmployeeDto" >
+       <!-- SELECT employee.*, d.dept_name
+        FROM employee e
+                 LEFT JOIN department d ON e.dept_id = d.id
+        WHERE e.name LIKE CONCAT('%', #{name}, '%')
+            LIMIT #{page.offset}, #{page.size}-->
+        SELECT employee.*, department.dept_name
+        FROM  employee
+        left join department on employee.dept_id = department.id
+        where employee.name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+
+</mapper>
